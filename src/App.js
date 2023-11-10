@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from "@emotion/react";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { theme } from "./theme";
+import MainLayout from "./layouts/MainLayout";
+import MainPage from "./pages/MainPage";
+import { CssBaseline } from "@mui/material";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <Routes>
+            <Route>
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<MainPage />} />
+                <Route path="products/:id" element={<ProductDetails />} />
+                {/* <Route path="shop" element={<ShopPage />} />
+                <Route path="on-sale" element={<OnSalePage />} />
+                <Route path="new-arrivals" element={<NewArrivalsPage />} />
+                <Route path="brands" element={<Brandspage />} />
+                <Route path="profile/:id" element={<ProdilePage />} />
+                <Route path="products/:id" element={<ProtuctDetails />} /> */}
+              </Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
   );
 }
 
